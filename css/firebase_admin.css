@@ -5,20 +5,31 @@
     box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
   }
   
-  .firebase-json-key {
-    font-family: monospace;
-    background: #fff;
-    border: 1px solid #ccc;
+  #firestore-documents-table {
+    width: 100%;
+    border-collapse: collapse;
   }
   
-  .firebase-collection-selector {
-    width: 50%;
+  #firestore-documents-table th, #firestore-documents-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
   }
   
-  .button--primary {
-    background: #007BFF;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-weight: bold;
+  .firebase-undo {
+    background-color: #ff9800;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  
+  .firebase-undo:hover {
+    background-color: #e68900;
+  }
+  
+  .firebase-edit {
+    padding: 5px;
+    width: 100%;
   }

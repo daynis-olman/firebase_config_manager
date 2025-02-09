@@ -1,6 +1,21 @@
 (function ($, Drupal) {
     Drupal.behaviors.firebaseEditor = {
       attach: function (context, settings) {
+        // Apply DataTables to Firestore documents table
+        if ($('#firestore-documents-table').length > 0) {
+          $('#firestore-documents-table').DataTable({
+            paging: true,
+            searching: true,
+            ordering: true,
+            lengthMenu: [10, 25, 50, 100],
+            language: {
+              search: "Filter results:",
+              lengthMenu: "Show _MENU_ entries",
+              zeroRecords: "No matching documents found"
+            }
+          });
+        }
+  
         $('.firebase-edit', context).once('firebase-edit').each(function () {
           var input = $(this);
           var field = input.data('field');

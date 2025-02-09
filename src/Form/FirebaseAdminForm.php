@@ -52,9 +52,10 @@ class FirebaseAdminForm extends FormBase {
     $form['#prefix'] = '<div id="firebase-admin-form">';
     $form['#suffix'] = '</div>';
     
-    // Attach CSS & JavaScript Libraries
+    // Attach CSS & JavaScript Libraries (Including DataTables)
     $form['#attached']['library'][] = 'firebase_config_manager/firebase_admin_styles';
     $form['#attached']['library'][] = 'firebase_config_manager/firebase_editor';
+    $form['#attached']['library'][] = 'firebase_config_manager/firebase_datatables';
 
     // Firebase Credentials Input
     if (!$config->get('firebase_key')) {
@@ -117,17 +118,18 @@ class FirebaseAdminForm extends FormBase {
 
     $document_markup = '<div id="firestore-documents-wrapper">';
     if (!empty($documents)) {
-      $document_markup .= '<table class="firestore-table"><tr><th>Document ID</th><th>Field</th><th>Value</th></tr>';
+      $document_markup .= '<table id="firestore-documents-table" class="display"><thead><tr><th>Document ID</th><th>Field</th><th>Value</th><th>Actions</th></tr></thead><tbody>';
       foreach ($documents as $doc_id => $fields) {
         foreach ($fields as $field_name => $field_value) {
           $document_markup .= "<tr>
             <td>{$doc_id}</td>
             <td>{$field_name}</td>
             <td><input type='text' class='firebase-edit' data-doc='{$doc_id}' data-field='{$field_name}' value='{$field_value}'></td>
+            <td><button class='firebase-undo' data-doc='{$doc_id}' data-field='{$field_name}'>Undo</button></td>
           </tr>";
         }
       }
-      $document_markup .= '</table>';
+      $document_markup .= '</tbody></table>';
     } else {
       $document_markup .= '<p>No editable fields found.</p>';
     }

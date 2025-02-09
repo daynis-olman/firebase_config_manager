@@ -10,3 +10,14 @@ firebase_editor:
     js/firebase_editor.js: {}
   dependencies:
     - core/jquery
+
+firebase_datatables:
+  version: 1.x
+  js:
+    js/datatables.min.js: { }
+    js/firebase_datatables.js: {}
+  css:
+    theme:
+      css/datatables.min.css: {}
+  dependencies:
+    - core/jquery
