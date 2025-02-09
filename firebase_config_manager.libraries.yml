@@ -3,3 +3,10 @@ firebase_admin_styles:
   css:
     theme:
       css/firebase_admin.css: {}
+
+firebase_editor:
+  version: 1.x
+  js:
+    js/firebase_editor.js: {}
+  dependencies:
+    - core/jquery

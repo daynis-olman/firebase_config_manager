@@ -1,0 +1,7 @@
+firebase_config_manager.update_document:
+  path: '/admin/firebase/update-document'
+  defaults:
+    _controller: 'Drupal\firebase_config_manager\Controller\FirebaseUpdateController::updateDocument'
+  methods: [POST]
+  requirements:
+    _permission: 'administer site configuration'
