@@ -24,6 +24,20 @@ A **Drupal 10 & 11 module** for managing **Firebase Remote Config** and **Firest
   - Follows **Form API** for structured admin UI.
   - **Error logging** enabled for debugging.
 
+## 🚀 Sequence Diagram
+
+![Firebase Config Manager Diagram](docs/assets/firebase_config_manager_diagram.png)
+
+## 🔹 Configuration Steps
+The **Firebase Config Manager** module allows administrators to configure Firebase credentials securely within Drupal. The admin enters the **Firebase JSON Key**, which is stored via the **Drupal Config API**. For security reasons, the credentials are **not retrievable once saved**. After successful authentication, the module dynamically fetches all available **Firestore collections** from Firebase and presents them in a **dropdown menu** for selection. Once a collection is chosen, it is **persisted in Drupal Config**, eliminating the need for re-selection in subsequent sessions.
+
+## 🔹 Document Management in Firestore
+Once a Firestore collection is selected, the module retrieves **all documents** under that collection. However, only **string and integer fields** are displayed for editing to **prevent accidental data corruption**. The admin can update the values directly via the **Drupal admin UI**, and upon saving, the new values are immediately **written to Firestore**. The system ensures **error handling and logging**, allowing administrators to track changes efficiently while maintaining data integrity.
+
+## 🔹 Firebase Remote Config Updates
+The module also allows administrators to **dynamically update Firebase Remote Config values**. A dedicated section in the admin panel enables modification of the **`labels->home`** value, which is useful for dynamically changing UI text or application behavior. Upon saving, the new configuration is **published instantly** to Firebase, enabling apps to reflect the change in real-time **without requiring a redeployment**. This significantly improves app update flexibility while reducing developer intervention.
+
+
 ## ⚙️ Configuration
 
 ### 🔹 Step 1: Navigate to Firebase Config Manager
