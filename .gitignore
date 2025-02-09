@@ -2,3 +2,4 @@
 /sites/default/files/config_*
 /sites/default/files/private/*
 /sites/default/files/tmp/*
+/vendor
