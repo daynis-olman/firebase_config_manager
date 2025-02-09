@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\firebase_config_manager\Service\FirebaseService;
 
 /**
- * Handles AJAX updates to Firestore.
+ * Handles AJAX updates and restores for Firestore.
  */
 class FirebaseUpdateController extends ControllerBase {
 
@@ -25,15 +25,17 @@ class FirebaseUpdateController extends ControllerBase {
     );
   }
 
-  public function updateDocument(Request $request) {
+  /**
+   * Restore Firestore document field to previous value.
+   */
+  public function restoreDocument(Request $request) {
     $collection = $request->request->get('collection');
     $doc = $request->request->get('doc');
     $field = $request->request->get('field');
-    $value = $request->request->get('value');
 
-    if ($this->firebaseService->updateFirestoreDocument($collection, $doc, $field, $value)) {
+    if ($this->firebaseService->restorePreviousValue($collection, $doc, $field)) {
       return new JsonResponse(['status' => 'success']);
     }
-    return new JsonResponse(['status' => 'error', 'message' => 'Failed to update Firestore'], 500);
+    return new JsonResponse(['status' => 'error', 'message' => 'Failed to restore Firestore value'], 500);
   }
 }

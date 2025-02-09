@@ -5,3 +5,11 @@ firebase_config_manager.update_document:
   methods: [POST]
   requirements:
     _permission: 'administer site configuration'
+
+firebase_config_manager.restore_document:
+  path: '/admin/firebase/restore-document'
+  defaults:
+    _controller: 'Drupal\firebase_config_manager\Controller\FirebaseUpdateController::restoreDocument'
+  methods: [POST]
+  requirements:
+    _permission: 'administer site configuration'

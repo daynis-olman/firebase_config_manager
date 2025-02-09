@@ -8,7 +8,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * Service to interact with Firebase Remote Config & Firestore.
+ * Service to interact with Firebase Firestore.
  */
 class FirebaseService {
 
@@ -20,7 +20,6 @@ class FirebaseService {
    */
   public function __construct(ConfigFactoryInterface $config_factory, LoggerInterface $logger) {
     $this->logger = $logger;
-
     $firebase_config = $config_factory->get('firebase_config_manager.settings')->get('firebase_key');
 
     if (!$firebase_config) {
@@ -36,46 +35,25 @@ class FirebaseService {
 
       $factory = (new Factory)->withServiceAccount($credentials);
       $this->firestore = $factory->createFirestore()->database();
-
     } catch (\Exception $e) {
       $this->logger->error('Firebase initialization error: ' . $e->getMessage());
     }
   }
 
   /**
-   * Get available Firestore collections.
+   * Store original value before update (for Undo functionality).
    */
-  public function getCollections() {
+  public function storeOriginalValue($collection, $document_id, $field, $value) {
     try {
-      return $this->firestore->collections();
-    } catch (FirebaseException $e) {
-      $this->logger->error('Error fetching collections: ' . $e->getMessage());
-      return [];
-    }
-  }
+      $docRef = $this->firestore->collection($collection)->document($document_id);
+      $docRef->update([
+        ['path' => '_previous_' . $field, 'value' => $value]
+      ]);
 
-  /**
-   * Get documents within a collection that contain only string or integer fields.
-   */
-  public function getFilteredDocuments($collection) {
-    try {
-      $documents = [];
-      $collectionRef = $this->firestore->collection($collection);
-      $querySnapshot = $collectionRef->documents();
-
-      foreach ($querySnapshot as $document) {
-        $filtered_fields = array_filter(
-          $document->data(),
-          fn($value) => is_string($value) || is_int($value)
-        );
-        if (!empty($filtered_fields)) {
-          $documents[$document->id()] = $filtered_fields;
-        }
-      }
-      return $documents;
+      return TRUE;
     } catch (FirebaseException $e) {
-      $this->logger->error('Error fetching documents: ' . $e->getMessage());
-      return [];
+      $this->logger->error('Error storing previous Firestore value: ' . $e->getMessage());
+      return FALSE;
     }
   }
 
@@ -84,15 +62,46 @@ class FirebaseService {
    */
   public function updateFirestoreDocument($collection, $document_id, $field, $new_value) {
     try {
+      // Fetch current value first
       $docRef = $this->firestore->collection($collection)->document($document_id);
+      $docSnapshot = $docRef->snapshot();
+      if ($docSnapshot->exists() && isset($docSnapshot[$field])) {
+        $this->storeOriginalValue($collection, $document_id, $field, $docSnapshot[$field]);
+      }
+
+      // Now update the field
       $docRef->update([
         ['path' => $field, 'value' => $new_value]
       ]);
 
-      $this->logger->info("Updated Firestore: {$collection}/{$document_id} - {$field} = $new_value");
       return TRUE;
     } catch (FirebaseException $e) {
       $this->logger->error('Error updating Firestore: ' . $e->getMessage());
+      return FALSE;
+    }
+  }
+
+  /**
+   * Restore the original value (Undo functionality).
+   */
+  public function restorePreviousValue($collection, $document_id, $field) {
+    try {
+      $docRef = $this->firestore->collection($collection)->document($document_id);
+      $docSnapshot = $docRef->snapshot();
+
+      if ($docSnapshot->exists() && isset($docSnapshot['_previous_' . $field])) {
+        $previousValue = $docSnapshot['_previous_' . $field];
+
+        $docRef->update([
+          ['path' => $field, 'value' => $previousValue]
+        ]);
+
+        return TRUE;
+      }
+      
+      return FALSE;
+    } catch (FirebaseException $e) {
+      $this->logger->error('Error restoring Firestore value: ' . $e->getMessage());
       return FALSE;
     }
   }
