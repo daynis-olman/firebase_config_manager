@@ -1,0 +1,19 @@
+{
+    "name": "drupal/firebase_config_manager",
+    "type": "drupal-module",
+    "description": "A module to manage Firebase Firestore and Firebase Remote Config from Drupal.",
+    "license": "GPL-2.0-or-later",
+    "require": {
+      "php": ">=8.1",
+      "kreait/firebase-php": "^6.0",
+      "drupal/core": "^10 || ^11"
+    },
+    "autoload": {
+      "psr-4": {
+        "Drupal\\firebase_config_manager\\": "src/"
+      }
+    },
+    "extra": {
+      "installer-name": "firebase_config_manager"
+    }
+  }
