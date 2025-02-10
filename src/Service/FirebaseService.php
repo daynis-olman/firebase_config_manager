@@ -41,6 +41,30 @@ class FirebaseService {
   }
 
   /**
+   * Retrieve all Firestore collections.
+   */
+  public function getCollections() {
+    if (!$this->firestore) {
+      $this->logger->error('Firestore connection is not established.');
+      return [];
+    }
+
+    try {
+      $collections = $this->firestore->collections();
+      $collectionNames = [];
+
+      foreach ($collections as $collection) {
+        $collectionNames[] = $collection->id();
+      }
+
+      return $collectionNames;
+    } catch (FirebaseException $e) {
+      $this->logger->error('Error retrieving Firestore collections: ' . $e->getMessage());
+      return [];
+    }
+  }
+
+  /**
    * Store original value before update (for Undo functionality).
    */
   public function storeOriginalValue($collection, $document_id, $field, $value) {
