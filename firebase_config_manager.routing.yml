@@ -1,21 +1,3 @@
-firebase_config_manager.update_document:
-  path: '/admin/firebase/update-document'
-  defaults:
-    _controller: 'Drupal\firebase_config_manager\Controller\FirebaseUpdateController::updateDocument'
-    _title: 'Update Firestore Document'
-  methods: [POST]
-  requirements:
-    _permission: 'firebase_config_manager.edit_firestore'
-
-firebase_config_manager.restore_document:
-  path: '/admin/firebase/restore-document'
-  defaults:
-    _controller: 'Drupal\firebase_config_manager\Controller\FirebaseUpdateController::restoreDocument'
-    _title: 'Restore Firestore Document'
-  methods: [POST]
-  requirements:
-    _permission: 'firebase_config_manager.edit_firestore'
-
 firebase_config_manager.admin_settings:
   path: '/admin/config/firebase'
   defaults:
@@ -25,6 +7,24 @@ firebase_config_manager.admin_settings:
   requirements:
     _permission: 'administer site configuration'
 
+firebase_config_manager.update_document:
+  path: '/admin/firebase/update-document'
+  defaults:
+    _controller: 'Drupal\firebase_config_manager\Controller\FirebaseUpdateController::updateDocument'
+    _title: 'Update Firestore Document'
+  methods: [POST]
+  requirements:
+    _permission: 'manage firebase config'
+
+firebase_config_manager.restore_document:
+  path: '/admin/firebase/restore-document'
+  defaults:
+    _controller: 'Drupal\firebase_config_manager\Controller\FirebaseUpdateController::restoreDocument'
+    _title: 'Restore Firestore Document'
+  methods: [POST]
+  requirements:
+    _permission: 'manage firebase config'
+
 firebase_config_manager.load_firestore_documents:
   path: '/admin/firebase/load-documents'
   defaults:
@@ -32,4 +32,4 @@ firebase_config_manager.load_firestore_documents:
     _title: 'Load Firestore Documents'
   methods: [POST]
   requirements:
-    _permission: 'firebase_config_manager.edit_firestore'
+    _permission: 'manage firebase config'
