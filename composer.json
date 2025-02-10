@@ -5,7 +5,7 @@
     "license": "GPL-2.0-or-later",
     "require": {
       "php": ">=8.1",
-      "kreait/firebase-php": "^6.0",
+      "kreait/firebase-php": "^6.9",
       "drupal/core": "^10 || ^11"
     },
     "autoload": {
