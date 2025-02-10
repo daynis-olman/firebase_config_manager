@@ -44,12 +44,16 @@ class FirebaseService {
    * Store original value before update (for Undo functionality).
    */
   public function storeOriginalValue($collection, $document_id, $field, $value) {
+    if (!$this->firestore) {
+      $this->logger->error('Firestore connection is not established.');
+      return FALSE;
+    }
+
     try {
       $docRef = $this->firestore->collection($collection)->document($document_id);
       $docRef->update([
         ['path' => '_previous_' . $field, 'value' => $value]
       ]);
-
       return TRUE;
     } catch (FirebaseException $e) {
       $this->logger->error('Error storing previous Firestore value: ' . $e->getMessage());
@@ -61,15 +65,18 @@ class FirebaseService {
    * Update Firestore document field.
    */
   public function updateFirestoreDocument($collection, $document_id, $field, $new_value) {
+    if (!$this->firestore) {
+      $this->logger->error('Firestore connection failed.');
+      return FALSE;
+    }
+
     try {
-      // Fetch current value first
       $docRef = $this->firestore->collection($collection)->document($document_id);
       $docSnapshot = $docRef->snapshot();
       if ($docSnapshot->exists() && isset($docSnapshot[$field])) {
         $this->storeOriginalValue($collection, $document_id, $field, $docSnapshot[$field]);
       }
 
-      // Now update the field
       $docRef->update([
         ['path' => $field, 'value' => $new_value]
       ]);
@@ -85,6 +92,11 @@ class FirebaseService {
    * Restore the original value (Undo functionality).
    */
   public function restorePreviousValue($collection, $document_id, $field) {
+    if (!$this->firestore) {
+      $this->logger->error('Firestore connection failed.');
+      return FALSE;
+    }
+
     try {
       $docRef = $this->firestore->collection($collection)->document($document_id);
       $docSnapshot = $docRef->snapshot();
