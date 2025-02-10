@@ -22,6 +22,7 @@ class FirebaseAdminForm extends FormBase {
    * Constructor.
    */
   public function __construct(ConfigFactoryInterface $config_factory, FirebaseService $firebase_service) {
+    parent::__construct();
     $this->configFactory = $config_factory;
     $this->firebaseService = $firebase_service;
   }
@@ -154,5 +155,7 @@ class FirebaseAdminForm extends FormBase {
       $config->set('selected_collection', $collection)->save();
       \Drupal::messenger()->addStatus($this->t("Firestore collection '$collection' selected."));
     }
+
+    return parent::submitForm($form, $form_state);
   }
 }
