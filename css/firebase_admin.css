@@ -1,35 +1,27 @@
-.firebase-admin-form {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
-  }
-  
-  #firestore-documents-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  #firestore-documents-table th, #firestore-documents-table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .firebase-undo {
-    background-color: #ff9800;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-  }
-  
-  .firebase-undo:hover {
-    background-color: #e68900;
-  }
-  
-  .firebase-edit {
-    padding: 5px;
-    width: 100%;
-  }
+/* File: /bitnami/drupal/modules/contrib/myfolder/css/firebase_admin.css */
+.firebase-undo {
+  background-color: #ff9800; /* Default background color */
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover state */
+.firebase-undo:hover {
+  background-color: #e68900; /* Darker orange on hover */
+}
+
+/* Active/Clicked state (optional) */
+.firebase-undo:active {
+  background-color: #cc7a00; /* Even darker orange when clicked */
+}
+
+/* Style for disabled undo buttons (optional) */
+.firebase-undo[disabled] {
+  background-color: #ccc; /* Grayed out when disabled */
+  cursor: not-allowed;
+}

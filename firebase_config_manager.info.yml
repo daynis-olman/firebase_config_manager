@@ -1,9 +1,10 @@
 name: 'Firebase Config Manager'
 type: module
-description: 'A module to update Firebase Remote Config and Firestore database.'
+description: 'A module to manage Firebase Firestore and Firebase Remote Config from Drupal.'
 core_version_requirement: ^10 || ^11
 package: Custom
 dependencies:
   - drupal:system
   - drupal:config
   - drupal:admin_toolbar
+  - drupal:menu_ui

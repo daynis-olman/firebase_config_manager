@@ -1,0 +1,8 @@
+manage firebase config:
+  title: 'Manage Firebase Configuration'
+  description: 'Allows users to manage Firebase configuration settings and Firestore documents.'
+  restrict access: TRUE
+administer firebase config:
+  title: 'Administer Firebase Configuration'
+  description: 'Allows users to administer Firebase configuration settings'
+  restrict access: TRUE

@@ -1,4 +1,4 @@
 services:
   firebase_config_manager.service:
     class: 'Drupal\firebase_config_manager\Service\FirebaseService'
-    arguments: ['@config.factory', '@logger.channel.default']
+    arguments: ['@config.factory', '@logger.channel.default', '@file_system']

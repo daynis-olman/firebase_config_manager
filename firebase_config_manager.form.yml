@@ -1,0 +1,6 @@
+firebase_config_manager.admin_settings:
+  type: form
+  form:
+    - 'firebase_key'  # Key input
+    - 'project_id_display'  # Firebase project ID display
+    - 'firebase_key_update'  # Button to update Firebase credentials

@@ -1,0 +1,6 @@
+firebase_config_manager.admin_settings:
+  title: 'Firebase Config Manager'
+  description: 'Configure Firebase Firestore and Remote Config settings.'
+  route_name: firebase_config_manager.admin_settings
+  parent: system.admin_config_system
+  weight: 100

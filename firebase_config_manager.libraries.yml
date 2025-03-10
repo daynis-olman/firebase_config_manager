@@ -14,10 +14,12 @@ firebase_editor:
 firebase_datatables:
   version: 1.x
   js:
-    js/datatables.min.js: { }
+    js/datatables.min.js: {}
     js/firebase_datatables.js: {}
   css:
     theme:
       css/datatables.min.css: {}
   dependencies:
     - core/jquery
+    - core/drupal.ajax
+    - core/drupal.once

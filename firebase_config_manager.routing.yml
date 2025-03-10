@@ -1,5 +1,5 @@
 firebase_config_manager.admin_settings:
-  path: '/admin/config/firebase'
+  path: '/admin/config/web-services/firebase'
   defaults:
     _form: 'Drupal\firebase_config_manager\Form\FirebaseAdminForm'
     _title: 'Firebase Config Manager'
