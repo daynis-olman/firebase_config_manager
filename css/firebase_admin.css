@@ -1,27 +1,82 @@
 /* File: /bitnami/drupal/modules/contrib/myfolder/css/firebase_admin.css */
-.firebase-undo {
-  background-color: #ff9800; /* Default background color */
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-  font-size: 12px;
+
+.firebase-admin-form {
+  background: #f8f9fa; /* Light gray background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.form-item label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: #343a40; /* Dark gray for labels */
+}
+
+.form-textarea-wrapper textarea,
+.firebase-edit {
+  width: 100%;
+  padding: 10px; /* Increased padding for better touch targets */
+  border: 1px solid #ced4da; /* Lighter border */
   border-radius: 4px;
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  box-sizing: border-box;
+  font-family: monospace;
+  font-size: 14px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Smooth transition */
 }
 
-/* Hover state */
-.firebase-undo:hover {
-  background-color: #e68900; /* Darker orange on hover */
+.form-textarea-wrapper textarea:focus,
+.firebase-edit:focus {
+  border-color: #80bdff; /* Blue focus outline */
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Standard focus outline */
 }
 
-/* Active/Clicked state (optional) */
-.firebase-undo:active {
-  background-color: #cc7a00; /* Even darker orange when clicked */
+#firestore-documents-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-/* Style for disabled undo buttons (optional) */
-.firebase-undo[disabled] {
-  background-color: #ccc; /* Grayed out when disabled */
-  cursor: not-allowed;
+#firestore-documents-table th,
+#firestore-documents-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6; /* Lighter border for rows */
+}
+
+#firestore-documents-table th {
+  background-color: #e9ecef; /* Light gray header background */
+  font-weight: bold;
+}
+
+/* Success/Error Feedback */
+.firebase-edit.success {
+  background-color: #d4edda; /* Green background for success */
+  border-color: #c3e6cb;
+}
+
+.firebase-edit.error {
+  background-color: #f8d7da; /* Red background for error */
+  border-color: #f5c6cb;
+}
+
+/* General Form Styling */
+.form-item {
+  margin-bottom: 15px;
+}
+
+/* Spacing for Form Elements */
+.form-textarea-wrapper,
+.form-select {
+  margin-top: 5px;
+}
+
+/* Error Messages */
+.error-message {
+    color: #dc3545; /* Bootstrap danger color */
+    margin-top: 5px;
+    font-size: 0.875rem;
 }
