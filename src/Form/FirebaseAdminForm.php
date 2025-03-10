@@ -191,7 +191,6 @@ class FirebaseAdminForm extends FormBase {
         $this->t('Document ID'),
         $this->t('Field'),
         $this->t('Value'),
-        $this->t('Actions'),
       ],
       '#attributes' => ['id' => 'firestore-documents-table'],
     ];
@@ -216,15 +215,6 @@ class FirebaseAdminForm extends FormBase {
                 'data-doc' => $doc_id,
                 'data-field' => $field_name,
                 'title' => $this->t('Enter alphanumeric characters and spaces only.'), // Tooltip
-              ],
-            ],
-            'actions' => [
-              '#type' => 'button',
-              '#value' => $this->t('Undo'),
-              '#attributes' => [
-                'class' => ['firebase-undo'],
-                'data-doc' => $doc_id,
-                'data-field' => $field_name,
               ],
             ],
           ];
