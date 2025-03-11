@@ -6,6 +6,7 @@
 
 A Drupal module that provides a user-friendly interface for managing data within a Google Firebase Firestore database directly from the Drupal admin panel.  This module allows administrators to securely connect to Firestore, browse collections, and edit document fields.
 
+
 ## Features
 
 *   **Secure Connection:** Securely connects to your Firebase project using service account credentials stored as an environment variable.  Credentials are *never* stored directly in the Drupal database.
@@ -17,12 +18,20 @@ A Drupal module that provides a user-friendly interface for managing data within
 *   **Drupal Permissions Integration:**  Uses Drupal's permission system to control access to the module's features.
 *   **Comprehensive Logging:** Logs all Firebase operations for auditing and troubleshooting.
 
+## Module Screenshot
+
+![Firebase Config Manager Diagram](docs/assets/module_screenshot.png)
+
 ## Requirements
 
 *   Drupal 10 or 11
 *   Composer
 *   A Google Firebase project with Firestore enabled.
 *   A Firebase service account with appropriate permissions to access Firestore.
+
+## Sequence Diagram
+
+![Firebase Config Manager Diagram](docs/assets/firebase_config_manager_diagram.png)
 
 ## Installation
 
@@ -111,8 +120,3 @@ A Drupal module that provides a user-friendly interface for managing data within
 
 *   **Never store your Firebase service account key directly in your code or Drupal's database.** Use environment variables, as described above.
 *   Grant the `manage firebase config` permission only to trusted users.
-
-## Sequence Diagram
-
-![Firebase Config Manager Diagram](docs/assets/firebase_config_manager_diagram.png)
-
